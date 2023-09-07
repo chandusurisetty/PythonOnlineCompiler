@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import threading
-import sys
-from timeout_decorator import timeout
+
 from solution import Analay
 app = Flask(__name__)
 
