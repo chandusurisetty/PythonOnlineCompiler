@@ -1,0 +1,11 @@
+***important***
+run btn positon //
+mobile version //
+infinity loop error //
+tab button  //
+make right side a text area  //
+user input //
+line numbers //
+
+**feature**
+auto fill version 

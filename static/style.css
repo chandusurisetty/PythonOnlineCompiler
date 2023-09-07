@@ -1,0 +1,121 @@
+body {
+  background-color: rgb(50, 48, 48);
+}
+.title {
+  color: red;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.codeExcute {
+  width: 100%;
+  height: 80vh;
+  background-color: black;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.left {
+  position: relative;
+  display: flex;
+  font-family: monospace;
+}
+
+.left,
+.right {
+  width: 48%;
+  background-color: rgb(107, 101, 101);
+  border: 5px solid black;
+  height: 95%;
+  margin: auto;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pointsBar {
+  background-color: aliceblue;
+  padding: 0.5rem;
+}
+.pointsBar li {
+  font-size: large;
+}
+.line-numbers {
+  counter-reset: line;
+  padding: 5px 10px;
+  background-color: #f4f4f4;
+  user-select: none;
+}
+.codeBar {
+  width: 100%;
+
+  resize: none;
+
+  /* Hide the vertical scrollbar */
+  word-wrap: break-word; /* Allow wrapping within words */
+  white-space: pre-wrap; /* Preserve line breaks */
+  height: auto; /* Let the height adjust as needed */
+  min-height: 10px;
+
+  font-size: 1rem;
+}
+.line {
+  counter-increment: line;
+  font-size: 1rem;
+}
+
+.line::before {
+  content: counter(line);
+  display: inline-block;
+  width: 10px; /* Adjust width as needed */
+  text-align: right;
+  margin-right: 10px;
+  color: #888;
+}
+
+.compile,
+.inputsBar {
+  color: aliceblue;
+  background: #000;
+  width: 100%;
+
+  resize: none;
+  /* Hide the vertical scrollbar */
+  word-wrap: break-word; /* Allow wrapping within words */
+  white-space: pre-wrap; /* Preserve line breaks */
+  /* Let the height adjust as needed */
+  min-height: 10px;
+  height: 50%;
+  font-size: 1rem;
+  margin: 0;
+}
+.run {
+  margin: auto;
+  padding: 0.5rem 2rem;
+  border: 1px solid red;
+  margin: 4px 1rem;
+
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 10px;
+  background-color: black;
+  color: aliceblue;
+  transition: all 0.4s;
+}
+.run:hover {
+  background-color: rgb(223, 223, 71);
+
+  color: #000;
+}
+@media (max-width: 750px) {
+  .codeExcute {
+    flex-direction: column;
+    height: auto;
+  }
+  .left,
+  .right {
+    height: 70vh;
+    width: 95%;
+  }
+}

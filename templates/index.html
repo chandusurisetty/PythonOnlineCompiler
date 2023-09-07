@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/style.css" />
+    <title>Python Online Compiler</title>
+  </head>
+  <body>
+    <h1 class="title">Python Online Compiler</h1>
+    <button class="run">Run</button>
+    <div class="codeExcute">
+      <div class="left">
+        <div class="line-numbers">
+          <div class="line"></div>
+        </div>
+        <textarea spellcheck="false" class="codeBar" name="" id=""></textarea>
+      </div>
+
+      <div class="right">
+        <textarea
+          name=""
+          spellcheck="false"
+          placeholder="Inputs...&#10;Note:- inputs are divided by next line &#10;Example>> &#10;10 &#10;20 &#10;40"
+          class="inputsBar"
+        ></textarea>
+        <textarea
+          spellcheck="false"
+          name=""
+          placeholder="Compiler"
+          class="compile"
+        ></textarea>
+      </div>
+    </div>
+    <div class="pointsBar">
+      <ol>
+        <li>
+          If your code has any inputs just mention then with "input()" you must
+          not give any text inside input method
+        </li>
+        <li>
+          When you mentioning the user values you need to divided each input by
+          next line
+        </li>
+        <li>It can support Pre Builted modules</li>
+        <li>Make sure you are not end up with endless loops</li>
+        <li>
+          In case of any bug issues you can mail me at
+          <a href="mailto:chandusurisetty58@gmail.com"
+            >chandusurisetty58@gmail.com</a
+          >
+        </li>
+      </ol>
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      const btn = document.querySelector(".run");
+      const codeData = document.querySelector(".codeBar");
+      const lineNumbers = document.querySelector(".line-numbers .line");
+
+      const compile = document.querySelector(".compile");
+      const inputBar = document.querySelector(".inputsBar");
+      codeData.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") {
+          e.preventDefault();
+          codeData.value = codeData.value + "    ";
+        }
+      });
+      codeData.addEventListener("input", (e) => {
+        const lines = codeData.value.split("\n").length;
+        console.log(lines);
+        lineNumbers.innerHTML = Array.from(
+          { length: lines },
+          (i) => `<div class="line"></div>`
+        ).join("");
+      });
+      btn.addEventListener("click", () => {
+        compile.value = "";
+        axios
+          .post("/getme", { code: codeData.value, inputs: inputBar.value })
+          .then((res) => {
+            message = res.data.message;
+            console.log(message);
+            if (message.startsWith("Traceback")) {
+              firstind = message.indexOf('", line');
+              secondind = message.indexOf('", line', firstind + 2);
+              console.log(message.slice(secondind + 3));
+              compile.value = ">" + message.slice(secondind + 3);
+            } else {
+              compile.value = ">" + message;
+            }
+          })
+          .catch((error) => {
+            console.log("error");
+          });
+      });
+    </script>
+  </body>
+</html>
