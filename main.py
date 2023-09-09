@@ -16,9 +16,9 @@ class RunnerThread(threading.Thread):
             anan = Analay(self.code)
 
             result = anan.solution()
-            print(result)
+            
         except Exception as e:
-            print(str(e))
+           
             result = str(e)
 
 
@@ -33,7 +33,7 @@ def home():
 @app.route("/getme", methods=["POST", "GET"])
 def getMe():
     data = request.json
-    print(data)
+    
     # output = StringIO()
     inputList = data['inputs'].split("\n")
     inputInd = 0
