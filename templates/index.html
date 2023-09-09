@@ -69,7 +69,7 @@
       });
       codeData.addEventListener("input", (e) => {
         const lines = codeData.value.split("\n").length;
-        console.log(lines);
+        
         lineNumbers.innerHTML = Array.from(
           { length: lines },
           (i) => `<div class="line"></div>`
@@ -81,18 +81,19 @@
           .post("/getme", { code: codeData.value, inputs: inputBar.value })
           .then((res) => {
             message = res.data.message;
-            console.log(message);
+            
             if (message.startsWith("Traceback")) {
               firstind = message.indexOf('", line');
               secondind = message.indexOf('", line', firstind + 2);
-              console.log(message.slice(secondind + 3));
+              
               compile.value = ">" + message.slice(secondind + 3);
             } else {
               compile.value = ">" + message;
             }
           })
           .catch((error) => {
-            console.log("error");
+            
+            compile.value="Some error Try again later";
           });
       });
     </script>
